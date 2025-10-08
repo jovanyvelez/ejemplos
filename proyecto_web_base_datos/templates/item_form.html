@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Editar' if item else 'Crear' }} Item - Aplicación Web CRUD{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col col-md-6" style="margin: 0 auto; max-width: 600px;">
+        <div class="card">
+            <div class="card-header">
+                <h2>{{ 'Editar Item' if item else 'Crear Nuevo Item' }}</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% if errors %}
+                        <div class="alert alert-error">
+                            <ul style="margin: 0; padding-left: 1.5rem;">
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="form-group">
+                        <label for="nombre" class="form-label">Nombre *</label>
+                        <input 
+                            type="text" 
+                            id="nombre" 
+                            name="nombre" 
+                            class="form-control {{ 'error' if errors }}" 
+                            value="{{ item.nombre if item else (form_data.nombre if form_data else '') }}"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea 
+                            id="descripcion" 
+                            name="descripcion" 
+                            class="form-control" 
+                            rows="4"
+                            placeholder="Descripción opcional del item"
+                        >{{ item.descripcion if item else (form_data.descripcion if form_data else '') }}</textarea>
+                    </div>
+                    
+                    {% if not item and not user_id %}
+                    <div class="form-group">
+                        <label for="propietario_id" class="form-label">Propietario *</label>
+                        <select id="propietario_id" name="propietario_id" class="form-control" required>
+                            <option value="">Seleccionar usuario...</option>
+                            {% for user in users %}
+                                <option value="{{ user.id }}" {{ 'selected' if form_data and form_data.propietario_id == user.id|string else '' }}>
+                                    {{ user.email }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% elif user_id %}
+                        <input type="hidden" name="propietario_id" value="{{ user_id }}">
+                        <div class="form-group">
+                            <label class="form-label">Propietario</label>
+                            <div style="padding: 0.75rem; background-color: var(--gray-100); border-radius: var(--border-radius);">
+                                {{ user_email if user_email else 'Usuario #' + user_id|string }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ '/users/' + user_id|string if user_id else '/items' }}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-{{ 'primary' if item else 'success' }}">
+                            {{ 'Actualizar' if item else 'Crear' }} Item
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

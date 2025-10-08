@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Aplicación Web CRUD{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>{% block header_title %}Aplicación Web CRUD{% endblock %}</h1>
+            <p>{% block header_subtitle %}Gestión de usuarios e items con FastAPI y SQLAlchemy{% endblock %}</p>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="/" class="{% if request.url.path == '/' %}active{% endif %}">Inicio</a></li>
+                <li><a href="/users" class="{% if '/users' in request.url.path %}active{% endif %}">Usuarios</a></li>
+                <li><a href="/items" class="{% if '/items' in request.url.path %}active{% endif %}">Items</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.type }}">
+                        {{ message.content }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Proyecto Web Base de Datos - Ejemplo educativo con FastAPI y Jinja2</p>
+        </div>
+    </footer>
+</body>
+</html>

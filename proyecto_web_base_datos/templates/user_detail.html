@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Usuario {{ user.email }} - Aplicación Web CRUD{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Detalle del Usuario</h2>
+                    <div class="d-flex gap-2">
+                        <a href="/users/{{ user.id }}/edit" class="btn btn-primary">Editar</a>
+                        <a href="/users" class="btn btn-secondary">Volver</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-md-6">
+                        <dl style="display: grid; grid-template-columns: 150px 1fr; gap: 0.5rem; margin: 0;">
+                            <dt style="font-weight: 600; color: var(--gray-700);">ID:</dt>
+                            <dd>{{ user.id }}</dd>
+                            
+                            <dt style="font-weight: 600; color: var(--gray-700);">Email:</dt>
+                            <dd>{{ user.email }}</dd>
+                            
+                            <dt style="font-weight: 600; color: var(--gray-700);">Estado:</dt>
+                            <dd>
+                                <span class="badge {{ 'badge-success' if user.es_activo else 'badge-danger' }}">
+                                    {{ 'Activo' if user.es_activo else 'Inactivo' }}
+                                </span>
+                            </dd>
+                            
+                            <dt style="font-weight: 600; color: var(--gray-700);">Fecha de Creación:</dt>
+                            <dd>{{ user.created_at if user.created_at else 'N/A' }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3>Items del Usuario</h3>
+                    <a href="/users/{{ user.id }}/items/create" class="btn btn-success">+ Nuevo Item</a>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if items %}
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Fecha de Creación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in items %}
+                                <tr>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.nombre }}</td>
+                                    <td>{{ item.descripcion or 'Sin descripción' }}</td>
+                                    <td>{{ item.created_at if item.created_at else 'N/A' }}</td>
+                                    <td>
+                                        <div class="d-flex gap-2">
+                                            <a href="/items/{{ item.id }}/edit" class="btn btn-primary btn-sm">Editar</a>
+                                            <form method="POST" action="/items/{{ item.id }}/delete" style="display: inline;" 
+                                                  onsubmit="return confirm('¿Estás seguro de que quieres eliminar este item?')">
+                                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📦</div>
+                        <h4>Este usuario no tiene items</h4>
+                        <p>Comienza creando el primer item para este usuario</p>
+                        <a href="/users/{{ user.id }}/items/create" class="btn btn-success">Crear Item</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    color: white;
+}
+.badge-success { background-color: var(--success-color); }
+.badge-danger { background-color: var(--danger-color); }
+</style>
+{% endblock %}

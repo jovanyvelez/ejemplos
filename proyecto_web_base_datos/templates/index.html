@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Aplicación Web CRUD{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Bienvenido a la Aplicación Web CRUD</h2>
+            </div>
+            <div class="card-body">
+                <p>Esta es una aplicación web de demostración que muestra cómo crear operaciones CRUD (Crear, Leer, Actualizar, Eliminar) usando:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>FastAPI</strong> - Framework web moderno y rápido para Python</li>
+                    <li><strong>SQLAlchemy</strong> - ORM para manejo de base de datos</li>
+                    <li><strong>Jinja2</strong> - Motor de plantillas para renderizar HTML</li>
+                    <li><strong>SQLite</strong> - Base de datos ligera para almacenamiento</li>
+                </ul>
+                
+                <div class="row mt-3">
+                    <div class="col col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 style="font-size: 1.25rem; margin: 0;">👥 Gestión de Usuarios</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Crea, visualiza, edita y elimina usuarios del sistema.</p>
+                                <a href="/users" class="btn btn-primary">Ver Usuarios</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 style="font-size: 1.25rem; margin: 0;">📦 Gestión de Items</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Administra items asociados a los usuarios registrados.</p>
+                                <a href="/items" class="btn btn-primary">Ver Items</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-warning mt-3">
+                    <strong>Nota educativa:</strong> Este proyecto es una evolución del proyecto API original, 
+                    mostrando cómo transformar una API REST en una aplicación web completa con interfaz de usuario.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
