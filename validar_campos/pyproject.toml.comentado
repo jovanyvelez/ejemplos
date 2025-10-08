@@ -1,0 +1,116 @@
+# 🎓 GUÍA DE CONFIGURACIÓN PARA ESTUDIANTES
+# =====================================
+
+# Este archivo te explica cómo está configurado el proyecto
+# y cómo puedes personalizarlo para tus propios experimentos
+
+[project]
+name = "validacion-formularios-educativo"
+version = "1.0.0"
+description = "Proyecto educativo para aprender validación de formularios con FastAPI y Pydantic"
+authors = [
+    {name = "Tu Nombre Aquí", email = "tu.email@colegio.edu"},
+]
+readme = "README.md"
+license = {text = "MIT"}
+
+# 🔧 DEPENDENCIAS DEL PROYECTO
+# Estas son las librerías que necesita nuestro proyecto para funcionar
+dependencies = [
+    # 🚀 FastAPI - Framework web moderno y rápido
+    "fastapi>=0.104.0",
+    
+    # 🌐 Uvicorn - Servidor web para ejecutar FastAPI
+    "uvicorn[standard]>=0.24.0",
+    
+    # 🛡️ Pydantic - Validación automática de datos
+    # [email] incluye soporte para validación de emails
+    "pydantic[email]>=2.5.0",
+    
+    # 🎨 Jinja2 - Motor de plantillas para HTML dinámico
+    "jinja2>=3.1.0",
+    
+    # 📝 Python-multipart - Para manejar formularios HTML
+    "python-multipart>=0.0.6",
+]
+
+# 📚 DEPENDENCIAS OPCIONALES PARA DESARROLLO
+# Estas dependencias solo se instalan si específicamente las pides
+[project.optional-dependencies]
+dev = [
+    # 🧪 Pytest - Para escribir tests
+    "pytest>=7.4.0",
+    
+    # 🔍 Black - Formateador de código Python
+    "black>=23.0.0",
+    
+    # 📋 Flake8 - Verificador de estilo de código
+    "flake8>=6.0.0",
+    
+    # 🏷️ MyPy - Verificador de tipos
+    "mypy>=1.7.0",
+]
+
+# 🛠️ CONFIGURACIÓN DE HERRAMIENTAS DE DESARROLLO
+
+[tool.black]
+# Configuración para Black (formateador de código)
+line-length = 88  # Máximo 88 caracteres por línea
+target-version = ['py38']  # Compatible con Python 3.8+
+
+[tool.pytest.ini_options]
+# Configuración para tests
+testpaths = ["tests"]  # Carpeta donde están los tests
+python_files = ["test_*.py"]  # Archivos que contienen tests
+
+[tool.mypy]
+# Configuración para verificación de tipos
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+
+# 🔨 SISTEMA DE BUILD
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# ========================================
+# 📋 COMANDOS ÚTILES PARA ESTUDIANTES
+# ========================================
+
+# 🚀 Para ejecutar la aplicación:
+# uv run uvicorn main:app --reload
+
+# 🧪 Para ejecutar los ejemplos de práctica:
+# uv run python ejemplos_practica.py
+
+# 🔍 Para formatear el código:
+# uv run black .
+
+# 🧪 Para ejecutar tests (cuando los tengas):
+# uv run pytest
+
+# 📊 Para verificar tipos:
+# uv run mypy .
+
+# ========================================
+# 🎯 EJERCICIOS SUGERIDOS
+# ========================================
+
+# 1. 📝 AGREGAR NUEVA DEPENDENCIA
+#    Agrega "rich" para hacer print más coloridos:
+#    En dependencies: "rich>=13.0.0"
+#    Luego: uv sync
+
+# 2. 🔧 CREAR SCRIPT PERSONALIZADO
+#    Agrega esto en [project.scripts]:
+#    start = "uvicorn main:app --reload"
+#    Luego podrás usar: uv run start
+
+# 3. 🧪 AGREGAR TESTS
+#    Crea una carpeta "tests/" y archivos test_*.py
+#    Instala dependencias dev: uv sync --extra dev
+
+# 4. 🎨 PERSONALIZAR CONFIGURACIÓN
+#    Cambia line-length en [tool.black] a 100
+#    Ejecuta: uv run black . para ver la diferencia

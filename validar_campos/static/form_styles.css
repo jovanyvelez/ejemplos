@@ -1,0 +1,305 @@
+/* 
+🎨 ESTILOS CSS - PROYECTO EDUCATIVO DE VALIDACIÓN DE FORMULARIOS
+
+Este archivo CSS hace que nuestro formulario se vea atractivo y profesional.
+También incluye estilos especiales para mostrar errores de validación de manera clara.
+
+📚 CONCEPTOS CSS QUE PUEDES APRENDER AQUÍ:
+- Flexbox para centrar elementos
+- Box-shadow para sombras elegantes
+- Transiciones para efectos suaves
+- Pseudo-clases como :hover y :focus
+- Variables CSS personalizadas
+- Diseño responsivo
+*/
+
+/* ========== VARIABLES CSS (PERSONALIZACIÓN FÁCIL) ========== */
+:root {
+    /* 🎨 Colores principales del diseño */
+    --color-primary: #4CAF50;      /* Verde principal */
+    --color-primary-hover: #45a049; /* Verde más oscuro para hover */
+    --color-error: #e74c3c;        /* Rojo para errores */
+    --color-success: #27ae60;      /* Verde para éxito */
+    --color-background: #f4f4f9;   /* Fondo gris claro */
+    --color-text: #333;           /* Texto principal */
+    --color-border: #ccc;         /* Bordes */
+    
+    /* 📏 Tamaños y espaciado */
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+}
+
+/* ========== ESTILOS GLOBALES ========== */
+
+/* 🌐 BODY - Configuración general de la página */
+body {
+    /* Fuente moderna y legible */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    /* Color de fondo suave */
+    background-color: var(--color-background);
+    color: var(--color-text);
+    
+    /* 📐 FLEXBOX: Centra el formulario en la pantalla */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;  /* Altura mínima de toda la ventana */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* ========== ESTILOS DEL FORMULARIO ========== */
+
+/* 📝 CONTENEDOR DEL FORMULARIO */
+form {
+    /* Fondo blanco para destacar sobre el fondo gris */
+    background: #ffffff;
+    
+    /* Bordes redondeados para un look moderno */
+    border-radius: var(--border-radius);
+    
+    /* Sombra sutil para dar profundidad */
+    box-shadow: var(--box-shadow);
+    
+    /* Espaciado interno generoso */
+    padding: 30px;
+    
+    /* Ancho responsivo */
+    width: 100%;
+    max-width: 400px;
+    
+    /* Bordes sutiles */
+    border: 1px solid #e0e0e0;
+}
+
+/* 📄 TÍTULO PRINCIPAL */
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* 📝 SUBTÍTULO */
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+/* ========== ESTILOS DE CAMPOS DE ENTRADA ========== */
+
+/* 🏷️ ETIQUETAS */
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 0.95rem;
+}
+
+/* 📝 INPUTS - Campos de texto */
+input {
+    /* Ancho completo del contenedor */
+    width: 100%;
+    
+    /* Espaciado interno cómodo */
+    padding: 12px 15px;
+    margin-bottom: 1rem;
+    
+    /* Bordes sutiles */
+    border: 2px solid var(--color-border);
+    border-radius: var(--border-radius);
+    
+    /* Importante para que el padding no afecte el ancho */
+    box-sizing: border-box;
+    
+    /* Tamaño de fuente legible */
+    font-size: 1rem;
+    font-family: inherit;
+    
+    /* Transición suave para efectos hover/focus */
+    transition: border-color var(--transition-speed) ease,
+                box-shadow var(--transition-speed) ease;
+}
+
+/* ✨ EFECTO FOCUS - Cuando el usuario hace clic en un input */
+input:focus {
+    /* Borde verde para indicar que está activo */
+    border-color: var(--color-primary);
+    
+    /* Quitar el outline por defecto del navegador */
+    outline: none;
+    
+    /* Sombra sutil verde */
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+/* 🎯 EFECTO HOVER - Cuando el mouse está sobre un input */
+input:hover {
+    border-color: var(--color-primary);
+}
+
+/* ========== ESTILOS DEL BOTÓN ========== */
+
+/* 🚀 BOTÓN PRINCIPAL */
+button {
+    /* Ancho completo */
+    width: 100%;
+    
+    /* Espaciado interno generoso */
+    padding: 12px 20px;
+    
+    /* Colores llamativos */
+    background-color: var(--color-primary);
+    color: white;
+    
+    /* Sin borde para un look limpio */
+    border: none;
+    border-radius: var(--border-radius);
+    
+    /* Fuente legible */
+    font-size: 1.1rem;
+    font-weight: 600;
+    
+    /* Cursor de mano para indicar que es clickeable */
+    cursor: pointer;
+    
+    /* Transición suave para el efecto hover */
+    transition: background-color var(--transition-speed) ease,
+                transform 0.1s ease;
+    
+    /* Margen superior para separarlo de los inputs */
+    margin-top: 1rem;
+}
+
+/* ✨ EFECTO HOVER DEL BOTÓN */
+button:hover {
+    background-color: var(--color-primary-hover);
+    /* Efecto sutil de elevación */
+    transform: translateY(-1px);
+}
+
+/* 🔽 EFECTO ACTIVE - Cuando se presiona el botón */
+button:active {
+    transform: translateY(0);
+}
+
+/* ========== ESTILOS DE ERRORES ========== */
+
+/* 🚨 MENSAJES DE ERROR */
+.error {
+    /* Color rojo llamativo pero no agresivo */
+    color: var(--color-error);
+    
+    /* Tamaño de fuente ligeramente menor */
+    font-size: 0.875rem;
+    
+    /* Espaciado para que no esté pegado a los inputs */
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+    
+    /* Padding para dar espacio interno */
+    padding: 8px 12px;
+    
+    /* Fondo sutil para destacar el error */
+    background-color: rgba(231, 76, 60, 0.1);
+    border-left: 3px solid var(--color-error);
+    border-radius: 4px;
+    
+    /* Peso de fuente medio para que se note */
+    font-weight: 500;
+}
+
+/* ========== CAJA INFORMATIVA EDUCATIVA ========== */
+
+/* 📚 CAJA DE INFORMACIÓN PARA ESTUDIANTES */
+.info-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-top: 30px;
+    max-width: 400px;
+    box-shadow: var(--box-shadow);
+}
+
+.info-box h3, .info-box h4 {
+    margin-top: 0;
+    color: #fff;
+}
+
+.info-box ol, .info-box ul {
+    padding-left: 20px;
+}
+
+.info-box li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* ========== DISEÑO RESPONSIVO ========== */
+
+/* 📱 PANTALLAS PEQUEÑAS (móviles) */
+@media (max-width: 480px) {
+    form {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .info-box {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+}
+
+/* 🖥️ PANTALLAS GRANDES */
+@media (min-width: 768px) {
+    form {
+        padding: 40px;
+    }
+}
+
+/* ========== ANIMACIONES SUTILES ========== */
+
+/* ✨ Animación de aparición para el formulario */
+form {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔄 Animación para errores */
+.error {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

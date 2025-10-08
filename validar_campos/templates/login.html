@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Formulario de Login - Proyecto Educativo</title>
+    <!-- 🎨 Enlazamos nuestro archivo CSS para que el formulario se vea bonito -->
+    <link rel="stylesheet" href="/static/form_styles.css">
+</head>
+<body>
+    <!-- 
+    📝 FORMULARIO HTML - CONCEPTOS IMPORTANTES:
+    
+    1. action="/login/" - A dónde se envían los datos cuando el usuario hace clic en "Login"
+    2. method="post" - Cómo se envían los datos (POST es seguro para contraseñas)
+    3. name="email" - El nombre que usará FastAPI para identificar este campo
+    4. required - El navegador no dejará enviar el formulario si este campo está vacío
+    -->
+    
+    <form action="/login/" method="post">
+        
+        <!-- 🎯 TÍTULO DEL FORMULARIO -->
+        <h1>🔐 Iniciar Sesión</h1>
+        <p class="subtitle">Introduce tus credenciales para acceder</p>
+        
+        <!-- ========== CAMPO EMAIL ========== -->
+        
+        <!-- 🏷️ ETIQUETA: Describe qué debe escribir el usuario -->
+        <label for="email">📧 Correo Electrónico:</label>
+        
+        <!-- 📝 INPUT: Donde el usuario escribe su email -->
+        <!-- 
+        ATRIBUTOS IMPORTANTES:
+        - type="email" - El navegador valida que parezca un email
+        - id="email" - Conecta con el label (cuando haces clic en la etiqueta, se enfoca el input)
+        - name="email" - CRUCIAL: Este nombre debe coincidir con el parámetro en main.py
+        - placeholder - Texto de ayuda que se ve cuando el campo está vacío
+        - required - No se puede enviar el formulario sin llenar este campo
+        -->
+        <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="ejemplo: estudiante@colegio.edu" 
+            required
+            autocomplete="email"
+        >
+        
+        <!-- 🚨 MOSTRAR ERRORES DEL EMAIL -->
+        <!--
+        Esta es la magia de Jinja2:
+        - {{ errors['email'] }} inserta el mensaje de error desde Python
+        - Si no hay error en el email, no se muestra nada
+        - Si hay error, se muestra el mensaje específico (ej: "formato de email inválido")
+        -->
+        {% if errors.get('email') %}
+            <div class="error">
+                ⚠️ {{ errors['email'] }}
+            </div>
+        {% endif %}
+        
+        <!-- ========== CAMPO CONTRASEÑA ========== -->
+        
+        <!-- 🏷️ ETIQUETA para la contraseña -->
+        <label for="password">🔐 Contraseña:</label>
+        
+        <!-- 🔒 INPUT: Donde el usuario escribe su contraseña -->
+        <!--
+        ATRIBUTOS IMPORTANTES:
+        - type="password" - Oculta lo que escribe el usuario (puntos en lugar de letras)
+        - name="password" - CRUCIAL: Debe coincidir con el parámetro en main.py
+        - minlength="8" - El navegador sugiere que la contraseña tenga al menos 8 caracteres
+        -->
+        <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Mínimo 8 caracteres" 
+            required
+            minlength="8"
+            autocomplete="current-password"
+        >
+        
+        <!-- 🚨 MOSTRAR ERRORES DE LA CONTRASEÑA -->
+        <!--
+        Igual que con el email, aquí mostramos errores específicos de la contraseña:
+        - "La contraseña debe tener al menos 8 caracteres" (desde nuestro validador personalizado)
+        - "Este campo es obligatorio" (si no escribieron nada)
+        -->
+        {% if errors.get('password') %}
+            <div class="error">
+                ⚠️ {{ errors['password'] }}
+            </div>
+        {% endif %}
+        
+        <!-- ========== BOTÓN DE ENVÍO ========== -->
+        
+        <!-- 🚀 BOTÓN: Envía el formulario al servidor -->
+        <!--
+        type="submit" - Cuando haces clic, envía todos los datos del formulario
+        a la URL especificada en action="/login/" usando el método POST
+        -->
+        <button type="submit">🎯 Iniciar Sesión</button>
+        
+    </form>
+    
+    <!-- 📚 INFORMACIÓN EDUCATIVA para estudiantes -->
+    <div class="info-box">
+        <h3>🎓 ¿Cómo funciona este formulario?</h3>
+        <ol>
+            <li><strong>HTML:</strong> Define la estructura del formulario</li>
+            <li><strong>CSS:</strong> Hace que se vea bonito</li>
+            <li><strong>FastAPI:</strong> Recibe los datos en el servidor</li>
+            <li><strong>Pydantic:</strong> Valida que los datos sean correctos</li>
+            <li><strong>Jinja2:</strong> Muestra errores dinámicamente</li>
+        </ol>
+        
+        <h4>🔍 Prueba estos casos para ver la validación:</h4>
+        <ul>
+            <li>Email sin @ (ej: "usuario.com")</li>
+            <li>Contraseña muy corta (ej: "123")</li>
+            <li>Dejar campos vacíos</li>
+            <li>Email válido y contraseña de 8+ caracteres ✅</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

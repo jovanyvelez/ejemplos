@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 ¡Login Exitoso!</title>
+    <style>
+        /* 🎨 Estilos para hacer la página de éxito más atractiva */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .success-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .back-button:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        .explanation {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- 🎉 PÁGINA DE ÉXITO -->
+    
+    <!-- ✅ ICONO DE ÉXITO animado -->
+    <div class="success-icon">✅</div>
+    
+    <!-- 🎊 MENSAJE PRINCIPAL -->
+    <h1>¡Excelente! Todo salió perfecto</h1>
+    
+    <!-- 📝 EXPLICACIÓN DE LO QUE PASÓ -->
+    <p><strong>🎯 ¡Felicitaciones! Los datos fueron validados correctamente.</strong></p>
+    
+    <p>Esto significa que:</p>
+    <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
+        <li>📧 Tu email tiene el formato correcto</li>
+        <li>🔐 Tu contraseña tiene al menos 8 caracteres</li>
+        <li>✨ Pydantic validó todo sin encontrar errores</li>
+        <li>🚀 FastAPI procesó la petición exitosamente</li>
+    </ul>
+    
+    <!-- 🔄 BOTÓN PARA VOLVER -->
+    <a href="/" class="back-button">🔄 Probar de nuevo</a>
+    
+    <!-- 📚 SECCIÓN EDUCATIVA -->
+    <div class="explanation">
+        <h3>🎓 ¿Qué acaba de pasar técnicamente?</h3>
+        
+        <p><strong>1. Envío del formulario:</strong> Cuando hiciste clic en "Iniciar Sesión", 
+        el navegador envió una petición HTTP POST a "/login/" con tus datos.</p>
+        
+        <p><strong>2. Recepción en FastAPI:</strong> El servidor recibió los datos y 
+        los pasó a la función <code>procesar_login()</code> en <code>main.py</code>.</p>
+        
+        <p><strong>3. Validación con Pydantic:</strong> Se intentó crear un objeto 
+        <code>User</code> con tus datos. Pydantic automáticamente validó:</p>
+        <ul>
+            <li>📧 Formato del email (gracias a <code>EmailStr</code>)</li>
+            <li>🔐 Longitud de la contraseña (gracias a nuestro validador personalizado)</li>
+        </ul>
+        
+        <p><strong>4. Éxito:</strong> Como no hubo errores de validación, 
+        llegaste a esta página de éxito.</p>
+        
+        <p><strong>🧠 Concepto clave:</strong> La validación en el backend es 
+        fundamental para la seguridad. Aunque el navegador también valida 
+        (como el <code>type="email"</code>), nunca podemos confiar solo en 
+        la validación del frontend porque puede ser manipulada.</p>
+    </div>
+    
+</body>
+</html>
